@@ -52,9 +52,10 @@ public class problem {
    void solve() throws IOException
    {
       long n = nextLong();
+      
       long res = 0;
       boolean found = false;
-      while (!found && (res < n))
+      while (!found && (res < n *n + 1))
       {
     	  if (test(n, res))
     	    found = true;
