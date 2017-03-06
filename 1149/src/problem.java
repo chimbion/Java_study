@@ -36,39 +36,42 @@ public class problem {
       out.flush();
    }
 
-   String get_a(int n)
+   char invert_sign(char sign)
+   {
+	   char res;
+	   if (sign == '+')
+		   res = '-';
+	   else
+		   res = '+';
+	   return res;
+	   
+   }
+   String get_a(int n, int s, char sign)
    {
 	   String res = "";
-	   if (n == 1) 
-	     res = "sin(1)";
+	   if (s == n)
+	     res = "sin(" + n + ")";
 	   else
 	   {
-		   char sign = '+';
-		   StringBuilder A = new StringBuilder("sin(" + n + ")"); 
-		   for (int i = n; i > 1; i--)
-		   {
-			   A.append((n - 1)+ " ");
-		   }
+		   res = "sin(" + s + sign + get_a(n, s + 1, invert_sign(sign)) + ')';
 	   }
 	   return res;
    }
    void solve() throws IOException
    {
       int n = nextInt();
-      //StringBuilder A = "", S = "";
-      
-      for (int i = n; i > 0; i--)
+    
+      StringBuilder S = new StringBuilder("");
+      int j = n;
+      for (int i = 1; i <= n; i ++)
       {
-//        S = 
-//        A = 
+    	 if (S.length() > 0)
+    	 {
+    		 S.insert(0, "(");
+    		 S.append(")");
+    	 }
+    	 S.append(get_a(i, 1, '-') + "+" + j--);
       }
-//      Ïóñòü An = sin(1–sin(2+sin(3–sin(4+…sin(n))…)
-//     Îáîçíà÷èì Sn = (…(A1+n)A2+n–1)A3+…+2)An+1
-//      ((sin(1)+3)sin(1–sin(2))+2)sin(1–sin(2+sin(3)))+1
-      
-      //out.print(S);
+      out.print(S);
    }
-//   sin(1)
-//   sin(1–sin(2))
-//   sin(1–sin(2+sin(3)))
 }
