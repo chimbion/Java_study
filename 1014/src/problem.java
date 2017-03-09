@@ -37,36 +37,36 @@ public class problem {
       out.flush();
    }
    
-   boolean test(long n, long c)
-   {
-     boolean res = false;
-     long m = 1;
-     String str = String.valueOf(c);
-     for (int i = 0; i < str.length(); i++)
-    	 m *= Integer.parseInt(str.substring(i, i+1));
-     if (m == n) 
-       res = true;
-     return res;
-   }
    
    void solve() throws IOException
    {
       long n = nextLong();
       
-      long res = 0;
-      boolean found = false;
-      while (!found && (res < n *n + 1))
-      {
-    	  if (test(n, res))
-    	    found = true;
-    	  else
-    	    res++;
-      }
+      String res = "";
       
-      if (found)
-        out.print(res);
+      if (n == 0)
+    	  out.print("10");
+      else if (n < 10)
+    	  out.print(String.valueOf(n));
       else
-        out.print(-1);
+      {   
+        int i = 9;
+        while (i > 1)
+        {
+    	  if (Math.floorMod(n, i) == 0)
+    	  {
+    	    res = String.valueOf(i) + res;
+    	    n = n / i;
+    	  }
+    	  else 
+    		  i--;
+        }
+        if ((res.length() > 0) && (n == 1))
+            out.print(res);
+          else
+            out.print(-1);
+      } 
+      
    }
 
 }
