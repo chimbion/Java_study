@@ -38,39 +38,28 @@ public class problem {
       out.flush();
    }
 
-   class pair implements Comparable<pair>
-   {
-	   int ID, M;
-	   pair(int ID, int M)
-	   {
-		   this.ID = ID;
-		   this.M = M;
-	   }
-	   public String toString()
-	   {
-		   return String.format("%d %d\n", ID, M);
-	   }
-	   public int compareTo(pair p)
-	   {
-		   return p.M - this.M;
-	   }
-   }
    
    void solve() throws IOException
    {
       int n = nextInt();
-      List<pair> pairs = new ArrayList<>();
+      List<Integer>[] ids = new ArrayList[101];
+      for (int i = 0; i <= 100; i++)
+    	  ids[i] = new ArrayList<Integer>();
+      
       for (int i = 0; i < n; i++)
-      {
-    	  pairs.add(new pair(nextInt(), nextInt()));
+      {	  
+    	  int id = nextInt();
+    	  int m = nextInt();
+     	  ids[m].add(id);
       }
-      pairs.sort(new Comparator<pair>()
-      {public int compare(pair p1, pair p2) {return p2.M - p1.M;}}
-      );
-      for (int i = 0; i < n; i++)
-      {
-    	  out.print(pairs.get(i));
-      }
+      for (int j = 100; j >= 0; j--)
+	      for (int i = 0; i < ids[j].size(); i++)
+	      {
+	    	  out.print(ids[j].get(i));
+	    	  out.print(" ");
+	    	  out.println(j);
+	      }	  
+	      
 
    }
 
